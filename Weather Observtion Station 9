@@ -1,0 +1,1 @@
+select distinct city from station where CITY not like'A%' AND CITY not like'E%' AND CITY not like'I%' AND CITY not like'O%' AND CITY not like'U%';
