@@ -1,0 +1,1 @@
+select cast(sum(LAT_N) as decimal(20,4)) from station where LAT_N >38.7880 and LAT_N <137.2345;
