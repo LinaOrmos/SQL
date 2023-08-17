@@ -1,0 +1,10 @@
+SELECT hacker_id, name, sum(maxchsc) 
+    FROM 
+    ( SELECT h.hacker_id as hacker_id, h.name as name ,s.challenge_id as             challenge_id, max(s.score) AS maxchsc
+    FROM Hackers AS h 
+    Join Submissions as s 
+    ON h.hacker_id=s.hacker_id
+    GROUP BY h.hacker_id, s.challenge_id, h.name) AS SUBQ
+    GROUP BY hacker_id, name 
+    HAVING sum(maxchsc)>0
+    ORDER BY sum(maxchsc) DESC, hacker_id;
