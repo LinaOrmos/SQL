@@ -1,0 +1,10 @@
+WITH TOT_NUM_CHALLENGES AS (
+    SELECT CHALLENGES.hacker_id, name, COUNT(challenge_id) AS num_challenges
+    FROM HACKERS JOIN CHALLENGES ON (HACKERS.hacker_id = CHALLENGES.hacker_id)
+    GROUP BY CHALLENGES.hacker_id, name
+    ORDER BY num_challenges DESC)
+    
+SELECT hacker_id, name, num_challenges
+FROM TOT_NUM_CHALLENGES
+WHERE num_challenges = (SELECT MAX(num_challenges) FROM TOT_NUM_CHALLENGES) OR num_challenges IN (SELECT num_challenges FROM TOT_NUM_CHALLENGES GROUP BY num_challenges HAVING COUNT(num_challenges) = 1)
+ORDER BY num_challenges DESC, hacker_id
