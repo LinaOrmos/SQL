@@ -1,8 +1,10 @@
-WITH filter_startdate AS(SELECT p1.Start_Date, p2.End_Date, ROW_NUMBER() OVER(ORDER BY Start_Date) RN1
+WITH filter_startdate AS(SELECT p1.Start_Date, p2.End_Date, 
+ROW_NUMBER() OVER(ORDER BY Start_Date) RN1
 FROM Projects p1 LEFT JOIN Projects p2 on p1.Start_Date = p2.End_Date
 WHERE p2.End_Date IS NULL
 ),
-filter_enddate AS(SELECT p3.End_Date, p4.Start_Date, ROW_NUMBER() OVER(ORDER BY End_Date) RN2
+filter_enddate AS(SELECT p3.End_Date, p4.Start_Date, 
+ROW_NUMBER() OVER(ORDER BY End_Date) RN2
 FROM Projects p3 LEFT JOIN Projects p4 ON p3.End_Date = p4.Start_Date
 WHERE p4.Start_Date IS NULL
 )
